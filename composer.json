@@ -6,7 +6,7 @@
         "laravel",
         "waapi-laravel-sdk"
     ],
-    "homepage": "https://github.com/waapi/waapi-laravel-sdk",
+    "homepage": "https://github.com/WaAPIapp/waapi-laravel-sdk",
     "license": "MIT",
     "authors": [
         {
