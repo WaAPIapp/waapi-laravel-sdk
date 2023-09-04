@@ -19,7 +19,7 @@
         "php": "^8.1",
         "illuminate/contracts": "^10.0",
         "spatie/laravel-package-tools": "^1.14.0",
-        "waapi/waapi-php-sdk": "dev-master"
+        "waapi/waapi-php-sdk": "^1.0"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
