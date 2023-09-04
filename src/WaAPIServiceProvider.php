@@ -17,9 +17,7 @@ class WaAPIServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('waapi-laravel-sdk')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_waapi-laravel-sdk_table')
-            ->hasCommand(WaAPICommand::class);
+            ->hasRoute('api')
+            ->hasConfigFile('waapi');
     }
 }

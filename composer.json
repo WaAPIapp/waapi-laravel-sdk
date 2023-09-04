@@ -17,8 +17,9 @@
     ],
     "require": {
         "php": "^8.1",
+        "illuminate/contracts": "^10.0",
         "spatie/laravel-package-tools": "^1.14.0",
-        "illuminate/contracts": "^10.0"
+        "waapi/waapi-php-sdk": "dev-master"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
@@ -40,22 +41,11 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "WaAPI\\WaAPI\\Tests\\": "tests/",
-            "Workbench\\App\\": "workbench/app/"
+            "WaAPI\\WaAPI\\Tests\\": "tests/"
         }
     },
     "scripts": {
-        "post-autoload-dump": "@composer run prepare",
-        "clear": "@php vendor/bin/testbench package:purge-waapi-laravel-sdk --ansi",
-        "prepare": "@php vendor/bin/testbench package:discover --ansi",
-        "build": [
-            "@composer run prepare",
-            "@php vendor/bin/testbench workbench:build --ansi"
-        ],
-        "start": [
-            "@composer run build",
-            "@php vendor/bin/testbench serve"
-        ],
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
         "analyse": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/pest --coverage",

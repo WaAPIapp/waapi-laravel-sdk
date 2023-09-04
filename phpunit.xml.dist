@@ -35,4 +35,9 @@
             <directory suffix=".php">./src</directory>
         </include>
     </source>
+    <php>
+        <env name="APP_ENV" value="testing" force="true" />
+        <env name="WAAPI_API_TOKEN" value="token" force="false" />
+        <env name="WAAPI_INSTANCE_ID" value="123" force="false" />
+    </php>
 </phpunit>
