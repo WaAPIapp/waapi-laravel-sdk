@@ -10,9 +10,10 @@ class WaAPI
     use Actions;
 
     private WaAPISdk $sdk;
+
     private ?int $instanceId;
 
-    public function __construct(?int $instanceId = null)
+    public function __construct(int $instanceId = null)
     {
         $this->sdk = new WaAPISdk(config('waapi.api_token'));
         $this->instanceId = $instanceId ?? config('waapi.instance_id');
@@ -23,7 +24,7 @@ class WaAPI
         return $this->instanceId;
     }
 
-    public function executeAction(string $action, array $payload, ?int $instanceId = null)
+    public function executeAction(string $action, array $payload, int $instanceId = null)
     {
         return $this->sdk->executeInstanceAction($instanceId ?? $this->instanceId, $action, $payload);
     }
@@ -43,29 +44,28 @@ class WaAPI
         return $this->sdk->createInstance();
     }
 
-    public function updateInstance(string $webhookUrl, array $webhookEvents, ?int $instanceId = null)
+    public function updateInstance(string $webhookUrl, array $webhookEvents, int $instanceId = null)
     {
         return $this->sdk->updateInstance($instanceId ?? $this->instanceId, $webhookUrl, $webhookEvents);
     }
 
-    public function deleteInstance(?int $instanceId = null)
+    public function deleteInstance(int $instanceId = null)
     {
         $this->sdk->deleteInstance($instanceId ?? $this->instanceId);
     }
 
-    public function getInstanceStatus(?int $instanceId = null)
+    public function getInstanceStatus(int $instanceId = null)
     {
         return $this->sdk->getInstanceClientStatus($instanceId ?? $this->instanceId);
     }
 
-    public function getInstanceQrCode(?int $instanceId = null)
+    public function getInstanceQrCode(int $instanceId = null)
     {
         return $this->sdk->getInstanceClientQrCode($instanceId ?? $this->instanceId);
     }
 
-    public function getInstanceInfo(?int $instanceId = null)
+    public function getInstanceInfo(int $instanceId = null)
     {
         return $this->sdk->getInstanceClientInfo($instanceId ?? $this->instanceId);
     }
-
 }

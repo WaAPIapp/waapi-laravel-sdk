@@ -4,7 +4,6 @@ namespace WaAPI\WaAPI;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use WaAPI\WaAPI\Commands\WaAPICommand;
 
 class WaAPIServiceProvider extends PackageServiceProvider
 {

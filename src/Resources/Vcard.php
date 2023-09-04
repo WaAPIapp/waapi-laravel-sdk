@@ -21,13 +21,12 @@ class Vcard
         public ?string $state = null,
         public ?string $country = null,
         public ?string $website = null
-    )
-    {
+    ) {
     }
 
     public function toArray()
     {
-        return (array)$this;
+        return (array) $this;
     }
 
     public function setWaid(?string $waid): void
@@ -109,5 +108,4 @@ class Vcard
     {
         $this->website = $website;
     }
-
 }
