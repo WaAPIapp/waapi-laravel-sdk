@@ -5,7 +5,7 @@ it('can get instance by ID', function () {
 
     $response = $waAPI->getInstanceById($waAPI->getInstanceId());
 
-    $this->assertSame($waAPI->getInstanceId(),(int) $response->id);
+    $this->assertSame($waAPI->getInstanceId(), (int) $response->id);
 });
 
 it('fails QR request on ready state', function () {
@@ -31,13 +31,12 @@ it('can get instance status', function () {
     $this->assertSame('ready', $meInfo->instanceStatus);
 });
 
-
 it('can get instance info', function () {
     $waAPI = new \WaAPI\WaAPI\WaAPI();
 
     $meInfo = $waAPI->getInstanceInfo();
 
-    $this->assertSame($waAPI->getInstanceId(), (int)$meInfo->instanceId);
+    $this->assertSame($waAPI->getInstanceId(), (int) $meInfo->instanceId);
 });
 
 it('can get message by id', function () {
@@ -55,7 +54,6 @@ it('can fetch messages', function () {
 
     $this->assertSame('test', print_r($response->data, true));
 })->skip('needs to be fixed');
-
 
 it('can get chats', function () {
     $waAPI = new \WaAPI\WaAPI\WaAPI();
@@ -88,7 +86,7 @@ it('can send vCard', function () {
     ));
 
     $this->assertArrayHasKey('sendVcard', $response->data);
-})->skip();;
+})->skip();
 
 it('can mark chat as seen', function () {
     $waAPI = new \WaAPI\WaAPI\WaAPI();
@@ -96,7 +94,7 @@ it('can mark chat as seen', function () {
     $response = $waAPI->sendSeen('123456789@c.us');
 
     $this->assertTrue($response->data['seenSend']);
-})->skip();;
+})->skip();
 
 it('can send media from Url', function () {
     $waAPI = new \WaAPI\WaAPI\WaAPI();

@@ -4,27 +4,23 @@ namespace WaAPI\WaAPI\Action;
 
 use WaAPI\WaAPI\Resources\Vcard;
 
-Trait Actions
+trait Actions
 {
     /**
      * send a message
      *
-     * @param string $chatId
-     * @param string $message
-     * @param array|null $mentions
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function sendMessage(
         string $chatId,
         string $message,
         ?array $mentions = []
-    )
-    {
+    ) {
         return $this->executeAction('send-message',
             compact([
                 'chatId',
                 'message',
-                'mentions'
+                'mentions',
             ])
         );
     }
@@ -32,10 +28,6 @@ Trait Actions
     /**
      * send a media file from a URL
      *
-     * @param string $chatId
-     * @param string $mediaUrl
-     * @param string $mediaCaption
-     * @param string $mediaName
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function sendMediaFromUrl(
@@ -43,14 +35,13 @@ Trait Actions
         string $mediaUrl,
         string $mediaCaption,
         string $mediaName,
-    )
-    {
+    ) {
         return $this->executeAction('send-media',
             compact([
                 'chatId',
                 'mediaUrl',
                 'mediaCaption',
-                'mediaName'
+                'mediaName',
             ])
         );
     }
@@ -59,13 +50,11 @@ Trait Actions
      * send seens
      * marks a chat as read / seen
      *
-     * @param string $chatId
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function sendSeen(
         string $chatId,
-    )
-    {
+    ) {
         return $this->executeAction('send-seen',
             compact([
                 'chatId',
@@ -73,23 +62,19 @@ Trait Actions
         );
     }
 
-
     /**
      * send a vcard
      *
-     * @param string $chatId
-     * @param Vcard $vCard
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function sendVcard(
         string $chatId,
-        Vcard  $vCard
-    )
-    {
+        Vcard $vCard
+    ) {
         return $this->executeAction('send-vcard',
             compact([
                 'chatId',
-                'vCard'
+                'vCard',
             ])
         );
     }
@@ -107,26 +92,21 @@ Trait Actions
     /**
      * fetch messages
      *
-     * @param string $chatId
-     * @param int|null $limit
-     * @param bool|null $fromMe
-     * @param bool|null $includeMedia
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function fetchMessages(
         string $chatId,
-        ?int   $limit = 25,
-        ?bool  $fromMe = null,
-        ?bool  $includeMedia = null
+        ?int $limit = 25,
+        bool $fromMe = null,
+        bool $includeMedia = null
 
-    )
-    {
+    ) {
         return $this->executeAction('fetch-messages',
             compact([
                 'chatId',
                 'limit',
                 'fromMe',
-                'includeMedia'
+                'includeMedia',
             ])
         );
     }
@@ -134,15 +114,12 @@ Trait Actions
     /**
      * Get a message by ID
      *
-     * @param string $messageId
-     * @param bool|null $includeMedia
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function getMessageById(
         string $messageId,
-        ?bool  $includeMedia = null
-    )
-    {
+        bool $includeMedia = null
+    ) {
         return $this->executeAction('get-message-by-id',
             compact([
                 'messageId',
@@ -154,15 +131,12 @@ Trait Actions
     /**
      * Delete a message by ID
      *
-     * @param string $messageId
-     * @param bool|null $forEveryone
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function deleteMessageById(
         string $messageId,
-        ?bool  $forEveryone = null
-    )
-    {
+        bool $forEveryone = null
+    ) {
         return $this->executeAction('delete-message-by-id',
             compact([
                 'messageId',
@@ -184,16 +158,14 @@ Trait Actions
     /**
      * Check if a user is registered
      *
-     * @param string $contactId
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function isRegisteredUser(
         string $contactId
-    )
-    {
+    ) {
         return $this->executeAction('is-registered-user',
             compact([
-                'contactId'
+                'contactId',
             ])
         );
     }
@@ -201,16 +173,14 @@ Trait Actions
     /**
      * Get profile picture
      *
-     * @param string $contactId
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function getProfilePicture(
         string $contactId
-    )
-    {
+    ) {
         return $this->executeAction('get-profile-pic-url',
             compact([
-                'contactId'
+                'contactId',
             ])
         );
     }
@@ -218,16 +188,14 @@ Trait Actions
     /**
      * Get a contact by ID
      *
-     * @param string $contactId
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function getContactbyId(
         string $contactId
-    )
-    {
+    ) {
         return $this->executeAction('get-contact-by-id',
             compact([
-                'contactId'
+                'contactId',
             ])
         );
     }
@@ -235,16 +203,14 @@ Trait Actions
     /**
      * Block a contact by ID
      *
-     * @param string $contactId
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function blockContactbyId(
         string $contactId
-    )
-    {
+    ) {
         return $this->executeAction('block-contact',
             compact([
-                'contactId'
+                'contactId',
             ])
         );
     }
@@ -252,16 +218,14 @@ Trait Actions
     /**
      * Unblock a contact by ID
      *
-     * @param string $contactId
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function unblockContactbyId(
         string $contactId
-    )
-    {
+    ) {
         return $this->executeAction('unblock-contact',
             compact([
-                'contactId'
+                'contactId',
             ])
         );
     }
@@ -269,16 +233,14 @@ Trait Actions
     /**
      * Get a chat by ID
      *
-     * @param string $chatId
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function getChatById(
         string $chatId
-    )
-    {
+    ) {
         return $this->executeAction('get-chat-by-id',
             compact([
-                'chatId'
+                'chatId',
             ])
         );
     }
@@ -286,19 +248,16 @@ Trait Actions
     /**
      * Create a group
      *
-     * @param string $groupName
-     * @param array $groupParticipants
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function createGroup(
         string $groupName,
         array $groupParticipants
-    )
-    {
+    ) {
         return $this->executeAction('create-group',
             compact([
                 'groupName',
-                'groupParticipants'
+                'groupParticipants',
             ])
         );
     }
@@ -306,16 +265,14 @@ Trait Actions
     /**
      * Get group participants
      *
-     * @param string $chatId
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function getGroupParticipants(
         string $chatId
-    )
-    {
+    ) {
         return $this->executeAction('get-group-participants',
             compact([
-                'chatId'
+                'chatId',
             ])
         );
     }
@@ -323,16 +280,14 @@ Trait Actions
     /**
      * Get group Info
      *
-     * @param string $chatId
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function getGroupInfo(
         string $chatId
-    )
-    {
+    ) {
         return $this->executeAction('get-group-info',
             compact([
-                'chatId'
+                'chatId',
             ])
         );
     }
@@ -340,10 +295,6 @@ Trait Actions
     /**
      * Update Group Info
      *
-     * @param string $chatId
-     * @param string $subject
-     * @param string $description
-     * @param string $pictureUrl
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function updateGroupInfo(
@@ -351,14 +302,13 @@ Trait Actions
         string $subject,
         string $description,
         string $pictureUrl,
-    )
-    {
+    ) {
         return $this->executeAction('update-group-info',
             compact([
                 'chatId',
                 'subject',
                 'description',
-                'pictureUrl'
+                'pictureUrl',
             ])
         );
     }
@@ -366,19 +316,16 @@ Trait Actions
     /**
      * Add a group participant
      *
-     * @param string $chatId
-     * @param string $participant
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function addGroupParticipant(
         string $chatId,
         string $participant
-    )
-    {
+    ) {
         return $this->executeAction('add-group-participant',
             compact([
                 'chatId',
-                'participant'
+                'participant',
             ])
         );
     }
@@ -386,19 +333,16 @@ Trait Actions
     /**
      * Remove a group participant
      *
-     * @param string $chatId
-     * @param string $participant
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function removeGroupParticipant(
         string $chatId,
         string $participant
-    )
-    {
+    ) {
         return $this->executeAction('remove-group-participant',
             compact([
                 'chatId',
-                'participant'
+                'participant',
             ])
         );
     }
@@ -406,19 +350,16 @@ Trait Actions
     /**
      * Promote a group participant to admin
      *
-     * @param string $chatId
-     * @param string $participant
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function promoteGroupParticipant(
         string $chatId,
         string $participant
-    )
-    {
+    ) {
         return $this->executeAction('promote-group-participant',
             compact([
                 'chatId',
-                'participant'
+                'participant',
             ])
         );
     }
@@ -426,19 +367,16 @@ Trait Actions
     /**
      * Demote a group participant from admin
      *
-     * @param string $chatId
-     * @param string $participant
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction
      */
     public function demoteGroupParticipant(
         string $chatId,
         string $participant
-    )
-    {
+    ) {
         return $this->executeAction('demote-group-participant',
             compact([
                 'chatId',
-                'participant'
+                'participant',
             ])
         );
     }
