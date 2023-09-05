@@ -9,7 +9,7 @@ class WaAPIServiceProvider extends PackageServiceProvider
 {
     public function boot()
     {
-        $this->app->bind('waapi',function(){
+        $this->app->bind('waapi', function () {
             return new WaAPI();
         });
     }
