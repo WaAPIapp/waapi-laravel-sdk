@@ -31,7 +31,7 @@ class WaAPIWebhookEvent
         return $this->type;
     }
 
-    public function getInstanceId(): bool
+    public function getInstanceId(): int
     {
         return $this->instanceId;
     }
