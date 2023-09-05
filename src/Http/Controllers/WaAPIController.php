@@ -6,7 +6,6 @@ use WaAPI\WaAPI\Events\WaAPIWebhookEvent;
 
 class WaAPIController
 {
-
     /**
      * @return void
      */
@@ -21,5 +20,4 @@ class WaAPIController
         );
 
     }
-
 }
