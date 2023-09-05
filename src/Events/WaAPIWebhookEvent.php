@@ -12,7 +12,6 @@ class WaAPIWebhookEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-
     /**
      * Create a new event instance.
      *
@@ -20,10 +19,9 @@ class WaAPIWebhookEvent
      */
     public function __construct(
         public string $type,
-        public int   $instanceId,
-        public array  $data,
-    )
-    {
+        public int $instanceId,
+        public array $data,
+    ) {
     }
 
     public function getType(): string
