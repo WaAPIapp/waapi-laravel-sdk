@@ -56,6 +56,21 @@ $waAPI = new WaAPI\WaAPI();
 echo $waAPI->echoPhrase('Hello, WaAPI!');
 ```
 
+Create a event listener to listen on the webhook events
+```bash
+php artisan make:listener WaAPIWebhookListener --event=\\WaAPI\\WaAPI\\Events\\WaAPIWebhookEvent
+```
+
+Register your listener in `app/Providers/EventServiceProvider.php` if autodiscovery for events is disabled
+
+```php
+    protected $listen = [
+        WaAPIWebhookEvent::class => [
+            WaAPIWebhookListener::class,
+        ]
+    ];
+```
+
 ## Testing
 
 ```bash
