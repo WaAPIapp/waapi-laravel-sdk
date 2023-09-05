@@ -7,13 +7,6 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class WaAPIServiceProvider extends PackageServiceProvider
 {
-    public function boot()
-    {
-        $this->app->bind('waapi',function(){
-            return new WaAPI();
-        });
-    }
-
     public function configurePackage(Package $package): void
     {
         /*

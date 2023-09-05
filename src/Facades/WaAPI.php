@@ -11,6 +11,6 @@ class WaAPI extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'waapi';
+        return \WaAPI\WaAPI\WaAPI::class;
     }
 }
