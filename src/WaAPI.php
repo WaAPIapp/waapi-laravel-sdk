@@ -9,10 +9,19 @@ class WaAPI
 {
     use Actions;
 
+    /**
+     * @var WaAPISdk
+     */
     private WaAPISdk $sdk;
 
+    /**
+     * @var int|null
+     */
     private ?int $instanceId;
 
+    /**
+     * @param int|null $instanceId
+     */
     public function __construct(int $instanceId = null)
     {
         $this->sdk = new WaAPISdk(config('waapi.api_token'));
