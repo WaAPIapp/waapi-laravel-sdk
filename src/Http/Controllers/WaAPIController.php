@@ -32,7 +32,7 @@ class WaAPIController
         $data = request()->all();
         $eventType = EventType::from($data['event']);
 
-        $eventData = $data['data'] ?? null;
+        $eventData = $data['data'] ?: null;
         $instanceId = $data['instanceId'];
 
         match ($eventType) {
@@ -120,8 +120,7 @@ class WaAPIController
                 $eventType,
                 $instanceId,
                 $eventData
-            ),
-            default => throw new UnknownEventException()
+            )
         };
 
     }
