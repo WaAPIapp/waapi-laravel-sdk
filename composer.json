@@ -62,10 +62,7 @@
         "laravel": {
             "providers": [
                 "WaAPI\\WaAPI\\WaAPIServiceProvider"
-            ],
-            "aliases": {
-                "WaAPI": "WaAPI\\WaAPI\\Facades\\WaAPI"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",
