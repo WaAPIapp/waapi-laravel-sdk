@@ -2,7 +2,6 @@
 
 namespace WaAPI\WaAPI\Events;
 
-
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -17,11 +16,10 @@ class WaAPIEvent
 
     public function __construct(
         public EventType $type,
-        public int    $instanceId,
-        public ?array  $data = null,
-    )
-    {
-        Log::info('created event: ' . get_class($this));
+        public int $instanceId,
+        public ?array $data = null,
+    ) {
+        Log::info('created event: '.get_class($this));
     }
 
     public function getType(): EventType
