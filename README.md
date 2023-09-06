@@ -22,11 +22,20 @@ php artisan vendor:publish --tag="waapi-config"
 
 This is the contents of the published config file:
 
+
 ```php
 return [
     'api_token' => env('WAAPI_API_TOKEN'),
     'instance_id' => env('WAAPI_INSTANCE_ID'),
 ];
+```
+
+Please adapt your .env with your instance ID and Token which can be obtained from your [API Tokens](https://waapi.app/user/api-tokens) 
+
+Replace with your token and your instance ID 
+```dotenv
+WAAPI_API_TOKEN=abcdefghijklmop
+WAAPI_INSTANCE_ID=123
 ```
 
 ## Usage
@@ -36,7 +45,9 @@ $waAPI = new WaAPI\WaAPI();
 $waAPI->sendMessage('1222333444@c.us', 'Hello there!');
 ```
 
-Create a event listener to listen on the webhook events
+### Webhook Listener
+
+Create an event listener to listen on the webhook events
 
 new Message example:
 
@@ -69,6 +80,15 @@ Register your listener in `app/Providers/EventServiceProvider.php` if autodiscov
         ],
     ];
 ```
+
+Example for `WaAPIMessageListener`:
+
+```php
+
+```
+
+
+
 
 ### Available events:
 
