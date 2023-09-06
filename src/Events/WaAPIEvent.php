@@ -18,7 +18,7 @@ class WaAPIEvent
     public function __construct(
         public EventType $type,
         public int    $instanceId,
-        public array  $data,
+        public ?array  $data = null,
     )
     {
         Log::info('created event: ' . get_class($this));

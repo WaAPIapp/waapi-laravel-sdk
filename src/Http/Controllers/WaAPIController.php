@@ -32,91 +32,94 @@ class WaAPIController
         $data = request()->all();
         $eventType = EventType::from($data['event']);
 
+        $eventData = $data['data'] ?? null;
+        $instanceId = $data['instanceId'];
+
         match ($eventType) {
             EventType::MESSAGE => WaAPIMessageEvent::dispatch(
                 $eventType,
-                $data['instanceId'],
-                $data['data']
+                $instanceId,
+                $eventData
             ),
             EventType::QR => WaAPIQrEvent::dispatch(
                 $eventType,
-                $data['instanceId'],
-                $data['data']
+                $instanceId,
+                $eventData
             ),
             EventType::AUTHENTICATED => WaAPIAuthenticatedEvent::dispatch(
                 $eventType,
-                $data['instanceId'],
-                $data['data']
+                $instanceId,
+                $eventData
             ),
             EventType::AUTH_FAILURE => WaAPIAuthFailureEvent::dispatch(
                 $eventType,
-                $data['instanceId'],
-                $data['data']
+                $instanceId,
+                $eventData
             ),
             EventType::READY => WaAPIInstanceReadyEvent::dispatch(
                 $eventType,
-                $data['instanceId'],
-                $data['data']
+                $instanceId,
+                $eventData
             ),
             EventType::MESSAGE_CREATED => WaAPIMessageCreatedEvent::dispatch(
                 $eventType,
-                $data['instanceId'],
-                $data['data']
+                $instanceId,
+                $eventData
             ),
             EventType::MESSAGE_REVOKED_EVERYONE => WaAPIMessageRevokedEveryoneEvent::dispatch(
                 $eventType,
-                $data['instanceId'],
-                $data['data']
+                $instanceId,
+                $eventData
             ),
             EventType::MESSAGE_REVOKED_ME => WaAPIMessageRevokedMeEvent::dispatch(
                 $eventType,
-                $data['instanceId'],
-                $data['data']
+                $instanceId,
+                $eventData
             ),
             EventType::MESSAGE_ACKNOWLEDGED => WaAPIMessageAcknowledgedEvent::dispatch(
                 $eventType,
-                $data['instanceId'],
-                $data['data']
+                $instanceId,
+                $eventData
             ),
             EventType::MESSAGE_REACTION => WaAPIMessageReactionEvent::dispatch(
                 $eventType,
-                $data['instanceId'],
-                $data['data']
+                $instanceId,
+                $eventData
             ),
             EventType::MEDIA_UPLOADED => WaAPIMediaUploadedEvent::dispatch(
                 $eventType,
-                $data['instanceId'],
-                $data['data']
+                $instanceId,
+                $eventData
             ),
             EventType::GROUP_JOIN => WaAPIGroupJoinEvent::dispatch(
                 $eventType,
-                $data['instanceId'],
-                $data['data']
+                $instanceId,
+                $eventData
             ),
             EventType::GROUP_LEAVE => WaAPIGroupLeaveEvent::dispatch(
                 $eventType,
-                $data['instanceId'],
-                $data['data']
+                $instanceId,
+                $eventData
             ),
             EventType::GROUP_UPDATE => WaAPIGroupUpdateEvent::dispatch(
                 $eventType,
-                $data['instanceId'],
-                $data['data']
+                $instanceId,
+                $eventData
             ),
             EventType::DISCONNECTED => WaAPIDisconnectedEvent::dispatch(
                 $eventType,
-                $data['instanceId'],
-                $data['data']
+                $instanceId,
+                $eventData
             ),
             EventType::CHANGE_STATE => WaAPIStateChangeEvent::dispatch(
                 $eventType,
-                $data['instanceId'],
-                $data['data']
+                $instanceId,
+                $eventData
             ),
             EventType::LOADING_SCREEN => WaAPILoadingScreenEvent::dispatch(
                 $eventType,
-                $data['instanceId'],
-                $data['data']
+                $instanceId,
+                $eventData
             ),
             default => throw new UnknownEventException()
         };
