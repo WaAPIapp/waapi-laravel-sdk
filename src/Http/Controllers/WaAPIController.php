@@ -21,7 +21,6 @@ use WaAPI\WaAPI\Events\WaAPIMessageRevokedEveryoneEvent;
 use WaAPI\WaAPI\Events\WaAPIMessageRevokedMeEvent;
 use WaAPI\WaAPI\Events\WaAPIQrEvent;
 use WaAPI\WaAPI\Events\WaAPIStateChangeEvent;
-use WaAPI\WaAPI\Events\WaAPIWebhookEvent;
 
 class WaAPIController
 {
@@ -121,7 +120,6 @@ class WaAPIController
             ),
             default => throw new UnknownEventException()
         };
-
 
     }
 }
