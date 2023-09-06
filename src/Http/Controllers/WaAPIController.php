@@ -31,7 +31,7 @@ class WaAPIController
         $data = request()->all();
         $eventType = EventType::from($data['event']);
 
-        $eventData = $data['data'] ?: null;
+        $eventData = isset($data['data']) ? $data['data'] : null;
         $instanceId = $data['instanceId'];
 
         match ($eventType) {
