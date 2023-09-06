@@ -20,4 +20,3 @@ class TestCase extends Orchestra
         ];
     }
 }
-
