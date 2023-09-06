@@ -47,6 +47,21 @@ $waAPI->sendMessage('1222333444@c.us', 'Hello there!');
 
 ### Webhook Listener
 
+The package provides a webhooks endpoint to handle incoming webhooks. Simply update your instance with the event types you want to listen to and the endpoint.
+
+Make sure your app is running on a publicly availabel domain. Locally the webhooks won't work. 
+
+```php
+app(WaAPI::class)->updateInstance(
+    route('waapi.webhooks'),
+    [
+        EventType::MESSAGE->value,
+        EventType::QR->value
+    ]
+);
+```
+
+
 Create an event listener to listen on the webhook events
 
 new Message example:
