@@ -28,15 +28,11 @@ composer require waapi/waapi-laravel-sdk
 
 You can publish and run the migrations with:
 
-```bash
-php artisan vendor:publish --tag="waapi-laravel-sdk-migrations"
-php artisan migrate
-```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="waapi-laravel-sdk-config"
+php artisan vendor:publish --tag="waapi-config"
 ```
 
 This is the contents of the published config file:
@@ -46,12 +42,6 @@ return [
     'api_token' => env('WAAPI_API_TOKEN'),
     'instance_id' => env('WAAPI_INSTANCE_ID'),
 ];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="waapi-laravel-sdk-views"
 ```
 
 ## Usage
@@ -78,15 +68,20 @@ php artisan make:listener WaAPIQrCodeListener --event=\\WaAPI\\WaAPI\\Events\\Qr
 Register your listener in `app/Providers/EventServiceProvider.php` if autodiscovery for events is disabled
 
 ```php
+    use App\Listeners\WaAPIInstanceReadyListener;
     use App\Listeners\WaAPIMessageListener;
     use WaAPI\WaAPI\Events\MessageEvent;
+    use WaAPI\WaAPI\Events\QrEvent;
         
     [...]
         
     protected $listen = [
-        WaAPIMessageListener::class => [
-            MessageEvent::class,
-        ]
+        MessageEvent::class => [
+            WaAPIMessageListener::class,
+        ],
+        QrEvent::class => [
+            WaAPIQrCodeListener::class,
+        ],
     ];
 ```
 

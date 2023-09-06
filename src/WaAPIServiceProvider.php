@@ -15,7 +15,7 @@ class WaAPIServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('waapi-laravel-sdk')
+            ->name('laravel-waapi')
             ->hasRoute('api')
             ->hasConfigFile('waapi');
     }
