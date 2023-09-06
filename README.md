@@ -34,7 +34,7 @@ Please adapt your .env with your instance ID and Token which can be obtained fro
 
 Replace with your token and your instance ID 
 ```dotenv
-WAAPI_API_TOKEN=abcdefghijklmop
+WAAPI_API_TOKEN=abcdefghijkl123456789
 WAAPI_INSTANCE_ID=123
 ```
 
