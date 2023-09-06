@@ -84,6 +84,25 @@ Register your listener in `app/Providers/EventServiceProvider.php` if autodiscov
 Example for `WaAPIMessageListener`:
 
 ```php
+<?php
+
+namespace App\Listeners;
+
+use WaAPI\WaAPI\Events\MessageEvent;
+use WaAPI\WaAPI\WaAPI;
+
+class WaAPIMessageListener
+{
+    /**
+     * Handle the event.
+     */
+    public function handle(MessageEvent $message): void
+    {
+        if (!$message->isFromMe()) {
+            app(WaAPI::class)->sendMessage($message->getFrom(), 'Hello to you too!');
+        }
+    }
+}
 
 ```
 
