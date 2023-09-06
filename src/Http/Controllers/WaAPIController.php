@@ -2,25 +2,24 @@
 
 namespace WaAPI\WaAPI\Http\Controllers;
 
-use PHPUnit\Event\UnknownEventException;
 use WaAPI\WaAPI\Enum\EventType;
-use WaAPI\WaAPI\Events\WaAPIAuthenticatedEvent;
-use WaAPI\WaAPI\Events\WaAPIAuthFailureEvent;
-use WaAPI\WaAPI\Events\WaAPIDisconnectedEvent;
-use WaAPI\WaAPI\Events\WaAPIGroupJoinEvent;
-use WaAPI\WaAPI\Events\WaAPIGroupLeaveEvent;
-use WaAPI\WaAPI\Events\WaAPIGroupUpdateEvent;
-use WaAPI\WaAPI\Events\WaAPIInstanceReadyEvent;
-use WaAPI\WaAPI\Events\WaAPILoadingScreenEvent;
-use WaAPI\WaAPI\Events\WaAPIMediaUploadedEvent;
-use WaAPI\WaAPI\Events\WaAPIMessageAcknowledgedEvent;
-use WaAPI\WaAPI\Events\WaAPIMessageCreatedEvent;
-use WaAPI\WaAPI\Events\WaAPIMessageEvent;
-use WaAPI\WaAPI\Events\WaAPIMessageReactionEvent;
-use WaAPI\WaAPI\Events\WaAPIMessageRevokedEveryoneEvent;
-use WaAPI\WaAPI\Events\WaAPIMessageRevokedMeEvent;
-use WaAPI\WaAPI\Events\WaAPIQrEvent;
-use WaAPI\WaAPI\Events\WaAPIStateChangeEvent;
+use WaAPI\WaAPI\Events\AuthenticatedEvent;
+use WaAPI\WaAPI\Events\AuthFailureEvent;
+use WaAPI\WaAPI\Events\DisconnectedEvent;
+use WaAPI\WaAPI\Events\GroupJoinEvent;
+use WaAPI\WaAPI\Events\GroupLeaveEvent;
+use WaAPI\WaAPI\Events\GroupUpdateEvent;
+use WaAPI\WaAPI\Events\InstanceReadyEvent;
+use WaAPI\WaAPI\Events\LoadingScreenEvent;
+use WaAPI\WaAPI\Events\MediaUploadedEvent;
+use WaAPI\WaAPI\Events\MessageAcknowledgedEvent;
+use WaAPI\WaAPI\Events\MessageCreatedEvent;
+use WaAPI\WaAPI\Events\MessageEvent;
+use WaAPI\WaAPI\Events\MessageReactionEvent;
+use WaAPI\WaAPI\Events\MessageRevokedEveryoneEvent;
+use WaAPI\WaAPI\Events\MessageRevokedMeEvent;
+use WaAPI\WaAPI\Events\QrEvent;
+use WaAPI\WaAPI\Events\StateChangeEvent;
 
 class WaAPIController
 {
@@ -36,87 +35,87 @@ class WaAPIController
         $instanceId = $data['instanceId'];
 
         match ($eventType) {
-            EventType::MESSAGE => WaAPIMessageEvent::dispatch(
+            EventType::MESSAGE => MessageEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData
             ),
-            EventType::QR => WaAPIQrEvent::dispatch(
+            EventType::QR => QrEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData
             ),
-            EventType::AUTHENTICATED => WaAPIAuthenticatedEvent::dispatch(
+            EventType::AUTHENTICATED => AuthenticatedEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData
             ),
-            EventType::AUTH_FAILURE => WaAPIAuthFailureEvent::dispatch(
+            EventType::AUTH_FAILURE => AuthFailureEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData
             ),
-            EventType::READY => WaAPIInstanceReadyEvent::dispatch(
+            EventType::READY => InstanceReadyEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData
             ),
-            EventType::MESSAGE_CREATED => WaAPIMessageCreatedEvent::dispatch(
+            EventType::MESSAGE_CREATED => MessageCreatedEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData
             ),
-            EventType::MESSAGE_REVOKED_EVERYONE => WaAPIMessageRevokedEveryoneEvent::dispatch(
+            EventType::MESSAGE_REVOKED_EVERYONE => MessageRevokedEveryoneEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData
             ),
-            EventType::MESSAGE_REVOKED_ME => WaAPIMessageRevokedMeEvent::dispatch(
+            EventType::MESSAGE_REVOKED_ME => MessageRevokedMeEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData
             ),
-            EventType::MESSAGE_ACKNOWLEDGED => WaAPIMessageAcknowledgedEvent::dispatch(
+            EventType::MESSAGE_ACKNOWLEDGED => MessageAcknowledgedEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData
             ),
-            EventType::MESSAGE_REACTION => WaAPIMessageReactionEvent::dispatch(
+            EventType::MESSAGE_REACTION => MessageReactionEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData
             ),
-            EventType::MEDIA_UPLOADED => WaAPIMediaUploadedEvent::dispatch(
+            EventType::MEDIA_UPLOADED => MediaUploadedEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData
             ),
-            EventType::GROUP_JOIN => WaAPIGroupJoinEvent::dispatch(
+            EventType::GROUP_JOIN => GroupJoinEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData
             ),
-            EventType::GROUP_LEAVE => WaAPIGroupLeaveEvent::dispatch(
+            EventType::GROUP_LEAVE => GroupLeaveEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData
             ),
-            EventType::GROUP_UPDATE => WaAPIGroupUpdateEvent::dispatch(
+            EventType::GROUP_UPDATE => GroupUpdateEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData
             ),
-            EventType::DISCONNECTED => WaAPIDisconnectedEvent::dispatch(
+            EventType::DISCONNECTED => DisconnectedEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData
             ),
-            EventType::CHANGE_STATE => WaAPIStateChangeEvent::dispatch(
+            EventType::CHANGE_STATE => StateChangeEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData
             ),
-            EventType::LOADING_SCREEN => WaAPILoadingScreenEvent::dispatch(
+            EventType::LOADING_SCREEN => LoadingScreenEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData

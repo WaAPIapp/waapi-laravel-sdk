@@ -11,9 +11,12 @@ This is where your description should go. Limit it to a paragraph or two. Consid
 
 [<img src="https://github-ads.s3.eu-central-1.amazonaws.com/waapi-laravel-sdk.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/waapi-laravel-sdk)
 
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
+We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can
+support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using.
+You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards
+on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
 ## Installation
 
@@ -40,6 +43,8 @@ This is the contents of the published config file:
 
 ```php
 return [
+    'api_token' => env('WAAPI_API_TOKEN'),
+    'instance_id' => env('WAAPI_INSTANCE_ID'),
 ];
 ```
 
@@ -53,22 +58,58 @@ php artisan vendor:publish --tag="waapi-laravel-sdk-views"
 
 ```php
 $waAPI = new WaAPI\WaAPI();
-echo $waAPI->echoPhrase('Hello, WaAPI!');
+$waAPI->sendMessage('1222333444@c.us', 'Hello there!');
 ```
 
 Create a event listener to listen on the webhook events
+
+new Message example:
+
 ```bash
-php artisan make:listener WaAPIWebhookListener --event=\\WaAPI\\WaAPI\\Events\\WaAPIWebhookEvent
+php artisan make:listener WaAPIMessageListener --event=\\WaAPI\\WaAPI\\Events\\MessageEvent
+```
+
+QR Code change example:
+
+```bash
+php artisan make:listener WaAPIQrCodeListener --event=\\WaAPI\\WaAPI\\Events\\QrEvent
 ```
 
 Register your listener in `app/Providers/EventServiceProvider.php` if autodiscovery for events is disabled
 
 ```php
+    use App\Listeners\WaAPIMessageListener;
+    use WaAPI\WaAPI\Events\MessageEvent;
+        
+    [...]
+        
     protected $listen = [
-        WaAPIWebhookEvent::class => [
-            WaAPIWebhookListener::class,
+        WaAPIMessageListener::class => [
+            MessageEvent::class,
         ]
     ];
+```
+
+### Available events:
+
+```
+AuthenticatedEvent
+AuthFailureEvent
+DisconnectedEvent
+GroupJoinEvent
+GroupLeaveEvent
+GroupUpdateEvent
+InstanceReadyEvent
+LoadingScreenEvent
+MediaUploadedEvent
+MessageAcknowledgedEvent
+MessageCreatedEvent
+MessageEvent
+MessageReactionEvent
+MessageRevokedEveryoneEvent
+MessageRevokedMeEvent
+QrEvent
+StateChangeEvent
 ```
 
 ## Testing
