@@ -2,7 +2,6 @@
 
 namespace WaAPI\WaAPI\Http\Controllers;
 
-use PHPUnit\Event\UnknownEventException;
 use WaAPI\WaAPI\Enum\EventType;
 use WaAPI\WaAPI\Events\WaAPIAuthenticatedEvent;
 use WaAPI\WaAPI\Events\WaAPIAuthFailureEvent;
