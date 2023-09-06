@@ -9,13 +9,14 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
+use WaAPI\WaAPI\Enum\EventType;
 
 class WaAPIEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public function __construct(
-        public string $type,
+        public EventType $type,
         public int    $instanceId,
         public array  $data,
     )
@@ -23,7 +24,7 @@ class WaAPIEvent
         Log::info('created event: ' . get_class($this));
     }
 
-    public function getType(): string
+    public function getType(): EventType
     {
         return $this->type;
     }
