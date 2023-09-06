@@ -38,5 +38,4 @@ class MessageEvent extends WaAPIEvent
     {
         return $this->getData()['message']['_data']['ack'] ?? false;
     }
-
 }
