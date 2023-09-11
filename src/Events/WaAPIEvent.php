@@ -7,7 +7,6 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 use WaAPI\WaAPI\Enum\EventType;
 
 class WaAPIEvent
@@ -16,10 +15,10 @@ class WaAPIEvent
 
     public function __construct(
         public EventType $type,
-        public int $instanceId,
-        public ?array $data = null,
-    ) {
-        Log::info('created event: '.get_class($this));
+        public int       $instanceId,
+        public ?array    $data = null,
+    )
+    {
     }
 
     public function getType(): EventType
