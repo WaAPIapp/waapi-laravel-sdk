@@ -15,10 +15,9 @@ class WaAPIEvent
 
     public function __construct(
         public EventType $type,
-        public int       $instanceId,
-        public ?array    $data = null,
-    )
-    {
+        public int $instanceId,
+        public ?array $data = null,
+    ) {
     }
 
     public function getType(): EventType
