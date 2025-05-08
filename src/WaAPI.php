@@ -16,7 +16,7 @@ class WaAPI
     /**
      * Construct a new instance of the class.
      *
-     * @param int|null $instanceId The instance ID. If not provided, the default instance ID will be used.
+     * @param  int|null  $instanceId The instance ID. If not provided, the default instance ID will be used.
      */
     public function __construct(int $instanceId = null)
     {
@@ -40,10 +40,11 @@ class WaAPI
     /**
      * Executes an action on a Workflow Automation (WaAPI) instance.
      *
-     * @param string $action The action to be executed.
-     * @param array $payload The payload for the action.
-     * @param int|null $instanceId The instance ID. If null, uses the default instance ID.
+     * @param  string  $action The action to be executed.
+     * @param  array  $payload The payload for the action.
+     * @param  int|null  $instanceId The instance ID. If null, uses the default instance ID.
      * @return \WaAPI\WaAPISdk\Resources\ExecutedAction The executed action.
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException If there is an error with the HTTP request.
      * @throws \WaAPI\WaAPISdk\Exceptions\FailedActionException If the action fails to execute.
      * @throws \WaAPI\WaAPISdk\Exceptions\NotFoundException If the instance is not found.
@@ -73,7 +74,7 @@ class WaAPI
     /**
      * Get an instance by ID.
      *
-     * @param int $instanceId The ID of the instance to retrieve.
+     * @param  int  $instanceId The ID of the instance to retrieve.
      * @return \WaAPI\WaAPISdk\Resources\Instance The retrieved instance.
      *
      * @throws \GuzzleHttp\Exception\GuzzleException If there is an error with the HTTP request.
@@ -104,10 +105,9 @@ class WaAPI
     /**
      * Updates the instance with the specified webhook URL and webhook events.
      *
-     * @param string $webhookUrl The URL to which webhooks will be sent.
-     * @param array $webhookEvents An array of webhook events.
-     * @param int|null $instanceId (optional) The ID of the instance to update. If not provided, the default instance ID will be used.
-     *
+     * @param  string  $webhookUrl The URL to which webhooks will be sent.
+     * @param  array  $webhookEvents An array of webhook events.
+     * @param  int|null  $instanceId (optional) The ID of the instance to update. If not provided, the default instance ID will be used.
      * @return \WaAPI\WaAPISdk\Resources\InstanceClientStatus The updated instance client status.
      *
      * @throws \GuzzleHttp\Exception\GuzzleException If there is an error with the HTTP request.
@@ -123,8 +123,7 @@ class WaAPI
     /**
      * Delete an instance.
      *
-     * @param int|null $instanceId The ID of the instance to delete. If null, the instance ID from the class property will be used.
-     *
+     * @param  int|null  $instanceId The ID of the instance to delete. If null, the instance ID from the class property will be used.
      * @return void
      *
      * @throws \GuzzleHttp\Exception\GuzzleException If an error occurs while making the API request.
@@ -140,7 +139,7 @@ class WaAPI
     /**
      * Get the status of an instance.
      *
-     * @param int|null $instanceId The ID of the instance. If null, the default instance ID will be used.
+     * @param  int|null  $instanceId The ID of the instance. If null, the default instance ID will be used.
      * @return \WaAPI\WaAPISdk\Resources\InstanceClientStatus The instance status.
      *
      * @throws \GuzzleHttp\Exception\GuzzleException If there is an error making the request.
@@ -156,8 +155,9 @@ class WaAPI
     /**
      * Get the QR code for an instance.
      *
-     * @param int|null $instanceId The ID of the instance. If not provided, the default instance ID will be used.
+     * @param  int|null  $instanceId The ID of the instance. If not provided, the default instance ID will be used.
      * @return \WaAPI\WaAPISdk\Resources\InstanceClientQrCode The QR code for the instance.
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException If there is an error with the HTTP request.
      * @throws \WaAPI\WaAPISdk\Exceptions\FailedActionException If the action fails.
      * @throws \WaAPI\WaAPISdk\Exceptions\NotFoundException If the instance is not found.
@@ -171,8 +171,7 @@ class WaAPI
     /**
      * Get the instance information.
      *
-     * @param int|null $instanceId The instance ID. If not provided, the default instance ID will be used.
-     *
+     * @param  int|null  $instanceId The instance ID. If not provided, the default instance ID will be used.
      * @return \WaAPI\WaAPISdk\Resources\InstanceClientMe The instance client object.
      *
      * @throws \GuzzleHttp\Exception\GuzzleException If there is an error with the HTTP request.
