@@ -1,121 +1,157 @@
 <?php
 
+namespace WaAPI\WaAPI\Tests;
+
 use WaAPI\WaAPI\Resources\Vcard;
 use WaAPI\WaAPI\WaAPI;
 
-it('can get instance by ID', function () {
-    $waAPI = new WaAPI;
+class WaAPITest extends TestCase
+{
+    public function test_can_get_instance_by_id(): void
+    {
+        $waAPI = new WaAPI;
 
-    $response = $waAPI->getInstanceById($waAPI->getInstanceId());
+        $response = $waAPI->getInstanceById($waAPI->getInstanceId());
 
-    $this->assertSame($waAPI->getInstanceId(), (int) $response->id);
-});
+        $this->assertSame($waAPI->getInstanceId(), (int) $response->id);
+    }
 
-it('fails QR request on ready state', function () {
-    $waAPI = new WaAPI;
+    public function test_fails_qr_request_on_ready_state(): void
+    {
+        $waAPI = new WaAPI;
 
-    $response = $waAPI->getInstanceQrCode();
+        $this->expectExceptionMessage('instance not in QR mode');
 
-})->throws('instance not in QR mode');
+        $waAPI->getInstanceQrCode();
+    }
 
-it('can get instances', function () {
-    $waAPI = new WaAPI;
+    public function test_can_get_instances(): void
+    {
+        $waAPI = new WaAPI;
 
-    $instances = $waAPI->getInstances();
+        $instances = $waAPI->getInstances();
 
-    $this->assertIsArray($instances);
-});
+        $this->assertIsArray($instances);
+    }
 
-it('can get instance status', function () {
-    $waAPI = new WaAPI;
+    public function test_can_get_instance_status(): void
+    {
+        $waAPI = new WaAPI;
 
-    $meInfo = $waAPI->getInstanceStatus();
+        $meInfo = $waAPI->getInstanceStatus();
 
-    $this->assertSame('ready', $meInfo->instanceStatus);
-});
+        $this->assertSame('ready', $meInfo->instanceStatus);
+    }
 
-it('can get instance info', function () {
-    $waAPI = new WaAPI;
+    public function test_can_get_instance_info(): void
+    {
+        $waAPI = new WaAPI;
 
-    $meInfo = $waAPI->getInstanceInfo();
+        $meInfo = $waAPI->getInstanceInfo();
 
-    $this->assertSame($waAPI->getInstanceId(), (int) $meInfo->instanceId);
-});
+        $this->assertSame($waAPI->getInstanceId(), (int) $meInfo->instanceId);
+    }
 
-it('can get message by id', function () {
-    $waAPI = new WaAPI;
+    /** @skip */
+    public function test_can_get_message_by_id(): void
+    {
+        $this->markTestSkipped();
 
-    $response = $waAPI->getMessageById('false_123456789@c.us_ABCDEFGHIJKLMNOP');
+        $waAPI = new WaAPI;
 
-    $this->assertArrayHasKey('message', $response->data);
-})->skip();
+        $response = $waAPI->getMessageById('false_123456789@c.us_ABCDEFGHIJKLMNOP');
 
-it('can fetch messages', function () {
-    $waAPI = new WaAPI;
+        $this->assertArrayHasKey('message', $response->data);
+    }
 
-    $response = $waAPI->fetchMessages('123456789@c.us', 1, false, false);
+    /** @skip */
+    public function test_can_fetch_messages(): void
+    {
+        $this->markTestSkipped('needs to be fixed');
 
-    $this->assertSame('test', print_r($response->data, true));
-})->skip('needs to be fixed');
+        $waAPI = new WaAPI;
 
-it('can get chats', function () {
-    $waAPI = new WaAPI;
+        $response = $waAPI->fetchMessages('123456789@c.us', 1, false, false);
 
-    $response = $waAPI->getChats();
+        $this->assertSame('test', print_r($response->data, true));
+    }
 
-    $this->assertArrayHasKey('id', $response->data[0]);
-});
+    public function test_can_get_chats(): void
+    {
+        $waAPI = new WaAPI;
 
-it('can send vCard', function () {
-    $waAPI = new WaAPI;
+        $response = $waAPI->getChats();
 
-    $response = $waAPI->sendVcard('123456789@c.us', new Vcard(
-        '123456789',
-        '+123456789',
-        'lastname',
-        'firstname',
-        'display name',
-        'title',
-        'second name',
-        'addiotnal name',
-        'organization',
-        'email@email.com',
-        'street',
-        'city',
-        'zip',
-        'state',
-        'country',
-        'www.website.com'
-    ));
+        $this->assertArrayHasKey('id', $response->data[0]);
+    }
 
-    $this->assertArrayHasKey('sendVcard', $response->data);
-})->skip();
+    /** @skip */
+    public function test_can_send_vcard(): void
+    {
+        $this->markTestSkipped();
 
-it('can mark chat as seen', function () {
-    $waAPI = new WaAPI;
+        $waAPI = new WaAPI;
 
-    $response = $waAPI->sendSeen('123456789@c.us');
+        $response = $waAPI->sendVcard('123456789@c.us', new Vcard(
+            '123456789',
+            '+123456789',
+            'lastname',
+            'firstname',
+            'display name',
+            'title',
+            'second name',
+            'addiotnal name',
+            'organization',
+            'email@email.com',
+            'street',
+            'city',
+            'zip',
+            'state',
+            'country',
+            'www.website.com'
+        ));
 
-    $this->assertTrue($response->data['seenSend']);
-})->skip();
+        $this->assertArrayHasKey('sendVcard', $response->data);
+    }
 
-it('can send media from Url', function () {
-    $waAPI = new WaAPI;
+    /** @skip */
+    public function test_can_mark_chat_as_seen(): void
+    {
+        $this->markTestSkipped();
 
-    $response = $waAPI->sendMediaFromUrl(
-        '123456789@c.us',
-        'https://waapi.app/imgs/christian-wiediger-5BG-9id-A6I-unsplash.jpg',
-        'Test Caption',
-        'test.jpg'
-    );
+        $waAPI = new WaAPI;
 
-    $this->assertArrayHasKey('_data', $response->data);
-})->skip();
+        $response = $waAPI->sendSeen('123456789@c.us');
 
-it('can send message', function () {
-    $waAPI = new WaAPI;
+        $this->assertTrue($response->data['seenSend']);
+    }
 
-    $response = $waAPI->sendMessage('123456789@c.us', 'This is a test message');
+    /** @skip */
+    public function test_can_send_media_from_url(): void
+    {
+        $this->markTestSkipped();
 
-    $this->assertArrayHasKey('_data', $response->data);
-})->skip();
+        $waAPI = new WaAPI;
+
+        $response = $waAPI->sendMediaFromUrl(
+            '123456789@c.us',
+            'https://waapi.app/imgs/christian-wiediger-5BG-9id-A6I-unsplash.jpg',
+            'Test Caption',
+            'test.jpg'
+        );
+
+        $this->assertArrayHasKey('_data', $response->data);
+    }
+
+    /** @skip */
+    public function test_can_send_message(): void
+    {
+        $this->markTestSkipped();
+
+        $waAPI = new WaAPI;
+
+        $response = $waAPI->sendMessage('123456789@c.us', 'This is a test message');
+
+        $this->assertArrayHasKey('_data', $response->data);
+    }
+}
