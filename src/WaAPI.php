@@ -90,6 +90,9 @@ class WaAPI
     /**
      * Create an instance using the WaAPISdk.
      *
+     * @param  string|null  $name The name of the instance.
+     * @param  string|null  $webhookUrl The webhook URL.
+     * @param  string[]|null  $webhookEvents The webhook events to subscribe to.
      * @return \WaAPI\WaAPISdk\Resources\Instance The created instance.
      *
      * @throws \GuzzleHttp\Exception\GuzzleException If an error occurs during the API request.
@@ -97,27 +100,45 @@ class WaAPI
      * @throws \WaAPI\WaAPISdk\Exceptions\NotFoundException If the requested resource is not found.
      * @throws \WaAPI\WaAPISdk\Exceptions\ValidationException If the input data is invalid.
      */
-    public function createInstance()
+    public function createInstance(string $name = null, string $webhookUrl = null, array $webhookEvents = [])
     {
-        return $this->sdk->createInstance();
+        return $this->sdk->createInstance($name, $webhookUrl, $webhookEvents);
     }
 
     /**
      * Updates the instance with the specified webhook URL and webhook events.
      *
-     * @param  string  $webhookUrl The URL to which webhooks will be sent.
+     * @param  string|null  $webhookUrl The URL to which webhooks will be sent.
      * @param  array  $webhookEvents An array of webhook events.
+     * @param  string|null  $name The name of the instance.
      * @param  int|null  $instanceId (optional) The ID of the instance to update. If not provided, the default instance ID will be used.
-     * @return \WaAPI\WaAPISdk\Resources\InstanceClientStatus The updated instance client status.
+     * @return \WaAPI\WaAPISdk\Resources\Instance The updated instance.
      *
      * @throws \GuzzleHttp\Exception\GuzzleException If there is an error with the HTTP request.
      * @throws \WaAPI\WaAPISdk\Exceptions\FailedActionException If the action fails for any reason.
      * @throws \WaAPI\WaAPISdk\Exceptions\NotFoundException If the instance is not found.
      * @throws \WaAPI\WaAPISdk\Exceptions\ValidationException If the input validation fails.
      */
-    public function updateInstance(string $webhookUrl, array $webhookEvents, int $instanceId = null)
+    public function updateInstance(string $webhookUrl = null, array $webhookEvents = [], string $name = null, int $instanceId = null)
     {
-        return $this->sdk->updateInstance($instanceId ?? $this->instanceId, $webhookUrl, $webhookEvents);
+        return $this->sdk->updateInstance($instanceId ?? $this->instanceId, $webhookUrl, $webhookEvents, $name);
+    }
+
+    /**
+     * Get the status of an async request by its reference UUID.
+     *
+     * @param  string  $reference The reference UUID.
+     * @param  int|null  $instanceId The instance ID.
+     * @return array
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException If there is an error with the HTTP request.
+     * @throws \WaAPI\WaAPISdk\Exceptions\FailedActionException If the action fails.
+     * @throws \WaAPI\WaAPISdk\Exceptions\NotFoundException If the instance is not found.
+     * @throws \WaAPI\WaAPISdk\Exceptions\ValidationException If there is a validation error.
+     */
+    public function getRequestStatus(string $reference, int $instanceId = null)
+    {
+        return $this->sdk->getInstanceRequestStatus($instanceId ?? $this->instanceId, $reference);
     }
 
     /**
