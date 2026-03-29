@@ -101,7 +101,7 @@ class WaAPI
      *
      * @param  string|null  $name  The name of the instance.
      * @param  string|null  $webhookUrl  The webhook URL.
-     * @param  string[]|null  $webhookEvents  The webhook events to subscribe to.
+     * @param  string[]  $webhookEvents  The webhook events to subscribe to.
      * @return Instance The created instance.
      *
      * @throws GuzzleException If an error occurs during the API request.
