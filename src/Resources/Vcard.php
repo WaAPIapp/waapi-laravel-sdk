@@ -21,8 +21,7 @@ class Vcard
         public ?string $state = null,
         public ?string $country = null,
         public ?string $website = null
-    ) {
-    }
+    ) {}
 
     public function toArray()
     {

@@ -2,6 +2,4 @@
 
 namespace WaAPI\WaAPI\Events;
 
-class DisconnectedEvent extends WaAPIEvent
-{
-}
+class DisconnectedEvent extends WaAPIEvent {}

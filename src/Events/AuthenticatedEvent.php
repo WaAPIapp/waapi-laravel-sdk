@@ -2,6 +2,4 @@
 
 namespace WaAPI\WaAPI\Events;
 
-class AuthenticatedEvent extends WaAPIEvent
-{
-}
+class AuthenticatedEvent extends WaAPIEvent {}

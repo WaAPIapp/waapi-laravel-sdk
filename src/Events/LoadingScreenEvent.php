@@ -2,6 +2,4 @@
 
 namespace WaAPI\WaAPI\Events;
 
-class LoadingScreenEvent extends WaAPIEvent
-{
-}
+class LoadingScreenEvent extends WaAPIEvent {}

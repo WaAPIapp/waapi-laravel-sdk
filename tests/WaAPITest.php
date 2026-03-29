@@ -1,7 +1,10 @@
 <?php
 
+use WaAPI\WaAPI\Resources\Vcard;
+use WaAPI\WaAPI\WaAPI;
+
 it('can get instance by ID', function () {
-    $waAPI = new \WaAPI\WaAPI\WaAPI();
+    $waAPI = new WaAPI;
 
     $response = $waAPI->getInstanceById($waAPI->getInstanceId());
 
@@ -9,14 +12,14 @@ it('can get instance by ID', function () {
 });
 
 it('fails QR request on ready state', function () {
-    $waAPI = new \WaAPI\WaAPI\WaAPI();
+    $waAPI = new WaAPI;
 
     $response = $waAPI->getInstanceQrCode();
 
 })->throws('instance not in QR mode');
 
 it('can get instances', function () {
-    $waAPI = new \WaAPI\WaAPI\WaAPI();
+    $waAPI = new WaAPI;
 
     $instances = $waAPI->getInstances();
 
@@ -24,7 +27,7 @@ it('can get instances', function () {
 });
 
 it('can get instance status', function () {
-    $waAPI = new \WaAPI\WaAPI\WaAPI();
+    $waAPI = new WaAPI;
 
     $meInfo = $waAPI->getInstanceStatus();
 
@@ -32,7 +35,7 @@ it('can get instance status', function () {
 });
 
 it('can get instance info', function () {
-    $waAPI = new \WaAPI\WaAPI\WaAPI();
+    $waAPI = new WaAPI;
 
     $meInfo = $waAPI->getInstanceInfo();
 
@@ -40,7 +43,7 @@ it('can get instance info', function () {
 });
 
 it('can get message by id', function () {
-    $waAPI = new \WaAPI\WaAPI\WaAPI();
+    $waAPI = new WaAPI;
 
     $response = $waAPI->getMessageById('false_123456789@c.us_ABCDEFGHIJKLMNOP');
 
@@ -48,7 +51,7 @@ it('can get message by id', function () {
 })->skip();
 
 it('can fetch messages', function () {
-    $waAPI = new \WaAPI\WaAPI\WaAPI();
+    $waAPI = new WaAPI;
 
     $response = $waAPI->fetchMessages('123456789@c.us', 1, false, false);
 
@@ -56,7 +59,7 @@ it('can fetch messages', function () {
 })->skip('needs to be fixed');
 
 it('can get chats', function () {
-    $waAPI = new \WaAPI\WaAPI\WaAPI();
+    $waAPI = new WaAPI;
 
     $response = $waAPI->getChats();
 
@@ -64,9 +67,9 @@ it('can get chats', function () {
 });
 
 it('can send vCard', function () {
-    $waAPI = new \WaAPI\WaAPI\WaAPI();
+    $waAPI = new WaAPI;
 
-    $response = $waAPI->sendVcard('123456789@c.us', new \WaAPI\WaAPI\Resources\Vcard(
+    $response = $waAPI->sendVcard('123456789@c.us', new Vcard(
         '123456789',
         '+123456789',
         'lastname',
@@ -89,7 +92,7 @@ it('can send vCard', function () {
 })->skip();
 
 it('can mark chat as seen', function () {
-    $waAPI = new \WaAPI\WaAPI\WaAPI();
+    $waAPI = new WaAPI;
 
     $response = $waAPI->sendSeen('123456789@c.us');
 
@@ -97,7 +100,7 @@ it('can mark chat as seen', function () {
 })->skip();
 
 it('can send media from Url', function () {
-    $waAPI = new \WaAPI\WaAPI\WaAPI();
+    $waAPI = new WaAPI;
 
     $response = $waAPI->sendMediaFromUrl(
         '123456789@c.us',
@@ -110,7 +113,7 @@ it('can send media from Url', function () {
 })->skip();
 
 it('can send message', function () {
-    $waAPI = new \WaAPI\WaAPI\WaAPI();
+    $waAPI = new WaAPI;
 
     $response = $waAPI->sendMessage('123456789@c.us', 'This is a test message');
 

@@ -2,6 +2,4 @@
 
 namespace WaAPI\WaAPI\Events;
 
-class GroupLeaveEvent extends WaAPIEvent
-{
-}
+class GroupLeaveEvent extends WaAPIEvent {}

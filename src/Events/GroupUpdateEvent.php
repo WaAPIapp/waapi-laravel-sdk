@@ -2,6 +2,4 @@
 
 namespace WaAPI\WaAPI\Events;
 
-class GroupUpdateEvent extends WaAPIEvent
-{
-}
+class GroupUpdateEvent extends WaAPIEvent {}

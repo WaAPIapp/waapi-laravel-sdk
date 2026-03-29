@@ -2,6 +2,4 @@
 
 namespace WaAPI\WaAPI\Events;
 
-class InstanceReadyEvent extends WaAPIEvent
-{
-}
+class InstanceReadyEvent extends WaAPIEvent {}

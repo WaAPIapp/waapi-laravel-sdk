@@ -17,8 +17,7 @@ class WaAPIEvent
         public EventType $type,
         public int $instanceId,
         public ?array $data = null,
-    ) {
-    }
+    ) {}
 
     public function getType(): EventType
     {

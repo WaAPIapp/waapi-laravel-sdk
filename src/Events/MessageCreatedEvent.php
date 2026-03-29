@@ -2,6 +2,4 @@
 
 namespace WaAPI\WaAPI\Events;
 
-class MessageCreatedEvent extends WaAPIEvent
-{
-}
+class MessageCreatedEvent extends WaAPIEvent {}

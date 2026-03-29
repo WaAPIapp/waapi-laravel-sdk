@@ -2,6 +2,4 @@
 
 namespace WaAPI\WaAPI\Events;
 
-class MessageRevokedMeEvent extends WaAPIEvent
-{
-}
+class MessageRevokedMeEvent extends WaAPIEvent {}

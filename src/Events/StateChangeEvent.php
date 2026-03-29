@@ -2,6 +2,4 @@
 
 namespace WaAPI\WaAPI\Events;
 
-class StateChangeEvent extends WaAPIEvent
-{
-}
+class StateChangeEvent extends WaAPIEvent {}

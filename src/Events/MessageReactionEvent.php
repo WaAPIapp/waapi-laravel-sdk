@@ -2,6 +2,4 @@
 
 namespace WaAPI\WaAPI\Events;
 
-class MessageReactionEvent extends WaAPIEvent
-{
-}
+class MessageReactionEvent extends WaAPIEvent {}

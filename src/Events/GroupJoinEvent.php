@@ -2,6 +2,4 @@
 
 namespace WaAPI\WaAPI\Events;
 
-class GroupJoinEvent extends WaAPIEvent
-{
-}
+class GroupJoinEvent extends WaAPIEvent {}
