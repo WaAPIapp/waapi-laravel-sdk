@@ -12,6 +12,7 @@ use WaAPI\WaAPISdk\Resources\Instance;
 use WaAPI\WaAPISdk\Resources\InstanceClientMe;
 use WaAPI\WaAPISdk\Resources\InstanceClientQrCode;
 use WaAPI\WaAPISdk\Resources\InstanceClientStatus;
+use WaAPI\WaAPISdk\Resources\WebhookSubscription;
 use WaAPI\WaAPISdk\WaAPISdk;
 
 class WaAPI
@@ -213,5 +214,57 @@ class WaAPI
     {
         // Get the instance client information using the SDK.
         return $this->sdk->getInstanceClientInfo($instanceId ?? $this->instanceId);
+    }
+
+    /**
+     * Get the webhook subscriptions registered on an instance.
+     *
+     * @param  int|null  $instanceId  The ID of the instance. If not provided, the default instance ID will be used.
+     * @return WebhookSubscription[] The webhook subscriptions.
+     *
+     * @throws GuzzleException If there is an error with the HTTP request.
+     * @throws FailedActionException If the action fails.
+     * @throws NotFoundException If the instance is not found.
+     * @throws ValidationException If there is a validation error.
+     */
+    public function getWebhookSubscriptions(?int $instanceId = null)
+    {
+        return $this->sdk->listWebhookSubscriptions($instanceId ?? $this->instanceId);
+    }
+
+    /**
+     * Subscribe a URL to receive instance events. Subscribing an already-registered
+     * URL again returns the existing subscription instead of creating a duplicate.
+     *
+     * @param  string  $url  The URL that will receive event payloads.
+     * @param  string[]  $events  The events to subscribe to.
+     * @param  string|null  $source  Who is registering this subscription (zapier, make, n8n or api). Defaults to api.
+     * @param  int|null  $instanceId  The ID of the instance. If not provided, the default instance ID will be used.
+     * @return WebhookSubscription The created (or already-existing) webhook subscription.
+     *
+     * @throws GuzzleException If there is an error with the HTTP request.
+     * @throws FailedActionException If the action fails.
+     * @throws NotFoundException If the instance is not found.
+     * @throws ValidationException If there is a validation error.
+     */
+    public function createWebhookSubscription(string $url, array $events, ?string $source = null, ?int $instanceId = null)
+    {
+        return $this->sdk->createWebhookSubscription($instanceId ?? $this->instanceId, $url, $events, $source);
+    }
+
+    /**
+     * Remove a webhook subscription from an instance.
+     *
+     * @param  int  $subscriptionId  The ID of the webhook subscription to remove.
+     * @param  int|null  $instanceId  The ID of the instance. If not provided, the default instance ID will be used.
+     *
+     * @throws GuzzleException If there is an error with the HTTP request.
+     * @throws FailedActionException If the action fails.
+     * @throws NotFoundException If the instance is not found.
+     * @throws ValidationException If there is a validation error.
+     */
+    public function deleteWebhookSubscription(int $subscriptionId, ?int $instanceId = null): void
+    {
+        $this->sdk->deleteWebhookSubscription($instanceId ?? $this->instanceId, $subscriptionId);
     }
 }
