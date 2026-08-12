@@ -229,7 +229,7 @@ class WaAPI
      */
     public function getWebhookSubscriptions(?int $instanceId = null)
     {
-        return $this->sdk->listWebhookSubscriptions($instanceId ?? $this->instanceId);
+        return $this->sdk->getWebhookSubscriptions($instanceId ?? $this->instanceId);
     }
 
     /**
