@@ -45,7 +45,7 @@
     "scripts": {
         "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
         "analyse": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/phpunit",
+        "test": "vendor/bin/phpunit --no-coverage",
         "test-coverage": "vendor/bin/phpunit --coverage-text",
         "format": "vendor/bin/pint"
     },
