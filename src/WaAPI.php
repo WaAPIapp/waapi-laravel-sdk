@@ -27,11 +27,16 @@ class WaAPI
      * Construct a new instance of the class.
      *
      * @param  int|null  $instanceId  The instance ID. If not provided, the default instance ID will be used.
+     * @param  WaAPISdk|null  $sdk  A pre-built SDK. Without this there is no seam:
+     *                              the SDK was constructed here unconditionally, so a test
+     *                              could only reach the real API -- which is why the suite
+     *                              needs live credentials and an instance to pass. Optional
+     *                              and last, so no existing caller changes.
      */
-    public function __construct(?int $instanceId = null)
+    public function __construct(?int $instanceId = null, ?WaAPISdk $sdk = null)
     {
         // Create a new instance of the WaAPISdk class using the API token from the configuration.
-        $this->sdk = new WaAPISdk(config('waapi.api_token'));
+        $this->sdk = $sdk ?? new WaAPISdk(config('waapi.api_token'));
 
         // Assign the provided instance ID, or use the default instance ID from the configuration.
         $this->instanceId = $instanceId ?? config('waapi.instance_id');
