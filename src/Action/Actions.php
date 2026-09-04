@@ -962,7 +962,7 @@ trait Actions
      */
     public function pinMessage(
         string $messageId,
-        int|null $duration = null,
+        ?int $duration = null,
         ?int $instanceId = null
     ): ExecutedAction {
         return $this->executeAction(
