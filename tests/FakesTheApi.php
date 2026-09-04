@@ -64,6 +64,79 @@ trait FakesTheApi
     }
 
     /**
+     * Answers with an arbitrary top-level body, for the endpoints that are not
+     * client actions.
+     *
+     * The instance endpoints put their payload at the TOP level under their own
+     * key -- `instance`, `instances`, `clientStatus`, `qrCode`, `me` -- not
+     * under `data`, and two of the five resources then read `data` from inside
+     * that. fakeAction() cannot express any of it, which is why the five
+     * instance tests could never have been written against it.
+     *
+     * @param  array<string, mixed>  $body
+     */
+    protected function fakeResponse(array $body, int $status = 200): WaAPI
+    {
+        $this->recorded = [];
+
+        $mock = new MockHandler(array_fill(0, 50, new Response(
+            $status,
+            ['Content-Type' => 'application/json'],
+            json_encode($body, JSON_THROW_ON_ERROR),
+        )));
+
+        $stack = HandlerStack::create($mock);
+        $stack->push(Middleware::history($this->recorded));
+
+        return new WaAPI(1, new WaAPISdk('test-token', new Client(['handler' => $stack])));
+    }
+
+    /**
+     * Asserts the verb and path of the request that went out.
+     */
+    protected function assertRequested(string $method, string $path): void
+    {
+        $this->assertNotEmpty($this->recorded, 'The SDK sent no request at all.');
+
+        $request = $this->recorded[0]['request'];
+
+        $this->assertSame($method, $request->getMethod(), 'The method used a different HTTP verb.');
+
+        // Compared whole rather than by suffix, and with the leading slash
+        // trimmed off both sides: the SDK builds relative URIs ('api/v1/...')
+        // and only picks up a leading slash once a base_uri resolves them, so a
+        // suffix match would be the only thing that survives both -- and a
+        // suffix match cannot see a wrong prefix.
+        $this->assertSame(
+            ltrim($path, '/'),
+            ltrim($request->getUri()->getPath(), '/'),
+            'The method called a different endpoint.'
+        );
+    }
+
+    /**
+     * The decoded body of the request that went out, for the cases where a
+     * key-by-key assertion is needed rather than assertActionCalled()'s
+     * flattened comparison -- sendVcard being the one method in this package
+     * that transforms its argument instead of forwarding it.
+     *
+     * @return array<string, mixed>
+     */
+    protected function sentPayload(): array
+    {
+        $this->assertNotEmpty($this->recorded, 'The SDK sent no request at all.');
+
+        $raw = (string) $this->recorded[0]['request']->getBody();
+        $body = json_decode($raw, true);
+
+        if (! is_array($body)) {
+            parse_str($raw, $body);
+        }
+
+        return $body;
+    }
+
+    /**
      * Asserts the action that was called and the exact body that carried it.
      *
      * Both halves matter and for different reasons: the action name is the only
