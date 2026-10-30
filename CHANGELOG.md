@@ -1,5 +1,16 @@
 # Changelog
 
+## v2.1.0 - 2026-10-30
+
+### Added
+
+- `MediaDownloadRetryEvent` for the `media_download_retry` webhook event: fired once for an incoming media message whose download had failed, with the file after a successful retry or a final error. Before, `EventType::from()` threw on the unknown name and the webhook route answered 500.
+- `MediaDownloadedEvent` for the `media_downloaded` webhook event: the file of an incoming message is available; fetch it with `downloadMedia()`.
+
+### Changed
+
+- Requires Laravel 12 or 13. Every 10.x and 11.x release of `laravel/framework` is affected by security advisories, and Composer no longer installs them. Laravel 10 and 11 projects keep v2.0.0.
+
 ## v2.0.0 - 2026-09-04
 
 ### Breaking
