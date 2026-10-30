@@ -11,6 +11,7 @@ use WaAPI\WaAPI\Events\GroupLeaveEvent;
 use WaAPI\WaAPI\Events\GroupUpdateEvent;
 use WaAPI\WaAPI\Events\InstanceReadyEvent;
 use WaAPI\WaAPI\Events\LoadingScreenEvent;
+use WaAPI\WaAPI\Events\MediaDownloadedEvent;
 use WaAPI\WaAPI\Events\MediaDownloadRetryEvent;
 use WaAPI\WaAPI\Events\MediaUploadedEvent;
 use WaAPI\WaAPI\Events\MessageAcknowledgedEvent;
@@ -122,6 +123,11 @@ class WaAPIController
                 $eventData
             ),
             EventType::MEDIA_DOWNLOAD_RETRY => MediaDownloadRetryEvent::dispatch(
+                $eventType,
+                $instanceId,
+                $eventData
+            ),
+            EventType::MEDIA_DOWNLOADED => MediaDownloadedEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData

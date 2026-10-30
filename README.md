@@ -136,6 +136,7 @@ GroupUpdateEvent
 InstanceReadyEvent
 LoadingScreenEvent
 MediaDownloadRetryEvent
+MediaDownloadedEvent
 MediaUploadedEvent
 MessageAcknowledgedEvent
 MessageCreatedEvent
@@ -151,6 +152,11 @@ StateChangeEvent
 failed: `data.media` carries the file after a successful retry, or `{status: 'error', error, detail, final: true}`,
 and `data.retry.outcome` says which (`delivered` or `failed`). It is opt-in: select it on the instance or in a
 webhook subscription.
+
+`MediaDownloadedEvent` (`media_downloaded`) fires once for an incoming media message as soon as its file is
+available — on the first download or after a retry — and carries `data.message` only; fetch the file with
+`downloadMedia()`. It works with every media mode and needs a message event (`message`, `message_create` or
+`message_edit`) subscribed too.
 
 ## Testing
 

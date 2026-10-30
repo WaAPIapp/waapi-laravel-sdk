@@ -6,6 +6,7 @@ namespace WaAPI\WaAPI\Tests;
 
 use Illuminate\Support\Facades\Event;
 use WaAPI\WaAPI\Enum\EventType;
+use WaAPI\WaAPI\Events\MediaDownloadedEvent;
 use WaAPI\WaAPI\Events\MediaDownloadRetryEvent;
 
 class WebhookEventsTest extends TestCase
@@ -28,6 +29,25 @@ class WebhookEventsTest extends TestCase
             return $event->getType() === EventType::MEDIA_DOWNLOAD_RETRY
                 && $event->getInstanceId() === 102664
                 && $event->getData()['retry']['outcome'] === 'delivered';
+        });
+    }
+
+    public function test_a_media_downloaded_webhook_dispatches_its_event(): void
+    {
+        Event::fake();
+
+        $this->postJson('/waapi/webhooks', [
+            'event' => 'media_downloaded',
+            'instanceId' => '102664',
+            'data' => [
+                'message' => ['id' => ['_serialized' => 'false_491700000002@lid_2A8F818580737FFA5AE0'], 'type' => 'image'],
+            ],
+        ])->assertOk();
+
+        Event::assertDispatched(MediaDownloadedEvent::class, function (MediaDownloadedEvent $event): bool {
+            return $event->getType() === EventType::MEDIA_DOWNLOADED
+                && $event->getInstanceId() === 102664
+                && $event->getData()['message']['id']['_serialized'] === 'false_491700000002@lid_2A8F818580737FFA5AE0';
         });
     }
 }
