@@ -135,6 +135,7 @@ GroupLeaveEvent
 GroupUpdateEvent
 InstanceReadyEvent
 LoadingScreenEvent
+MediaDownloadRetryEvent
 MediaUploadedEvent
 MessageAcknowledgedEvent
 MessageCreatedEvent
@@ -145,6 +146,11 @@ MessageRevokedMeEvent
 QrEvent
 StateChangeEvent
 ```
+
+`MediaDownloadRetryEvent` (`media_download_retry`) fires once for an incoming media message whose download had
+failed: `data.media` carries the file after a successful retry, or `{status: 'error', error, detail, final: true}`,
+and `data.retry.outcome` says which (`delivered` or `failed`). It is opt-in: select it on the instance or in a
+webhook subscription.
 
 ## Testing
 

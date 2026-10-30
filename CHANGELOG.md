@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- `MediaDownloadRetryEvent` for the `media_download_retry` webhook event. Before, `EventType::from()` threw on the unknown name and the webhook route answered 500.
+
 ## v2.0.0 - 2026-09-04
 
 ### Breaking

@@ -21,4 +21,5 @@ enum EventType: string
     case DISCONNECTED = 'disconnected';
     case CHANGE_STATE = 'change_state';
     case LOADING_SCREEN = 'loading_screen';
+    case MEDIA_DOWNLOAD_RETRY = 'media_download_retry';
 }
