@@ -23,4 +23,5 @@ enum EventType: string
     case LOADING_SCREEN = 'loading_screen';
     case MEDIA_DOWNLOAD_RETRY = 'media_download_retry';
     case MEDIA_DOWNLOADED = 'media_downloaded';
+    case CALL_STREAM_READY = 'call_stream_ready';
 }
