@@ -129,6 +129,7 @@ class WaAPIMessageListener
 ```
 AuthenticatedEvent
 AuthFailureEvent
+CallStreamReadyEvent
 DisconnectedEvent
 GroupJoinEvent
 GroupLeaveEvent
@@ -147,6 +148,8 @@ MessageRevokedMeEvent
 QrEvent
 StateChangeEvent
 ```
+
+`CallStreamReadyEvent` (beta) fires for an incoming call on an instance whose call policy connects calls to a voice agent of type `websocket_inbound`. `getData()` holds `callId`, `caller` (digits or `null`), `streamUrl` and `expiresInSeconds`. Your voice agent has to open a WebSocket to `streamUrl` within `expiresInSeconds`. The token in the URL is single-use: never log the URL.
 
 `MediaDownloadRetryEvent` (`media_download_retry`) fires once for an incoming media message whose download had
 failed: `data.media` carries the file after a successful retry, or `{status: 'error', error, detail, final: true}`,

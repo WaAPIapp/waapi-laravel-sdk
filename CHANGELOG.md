@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- `CallStreamReadyEvent` for the `call_stream_ready` webhook event (beta): an incoming call on an instance whose call policy connects calls to a voice agent of type `websocket_inbound`. The agent has to open a WebSocket to `streamUrl` within `expiresInSeconds`; the token in the URL is single-use, never log the URL.
+
 ## v2.1.0 - 2026-10-30
 
 ### Added

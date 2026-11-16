@@ -5,6 +5,7 @@ namespace WaAPI\WaAPI\Http\Controllers;
 use WaAPI\WaAPI\Enum\EventType;
 use WaAPI\WaAPI\Events\AuthenticatedEvent;
 use WaAPI\WaAPI\Events\AuthFailureEvent;
+use WaAPI\WaAPI\Events\CallStreamReadyEvent;
 use WaAPI\WaAPI\Events\DisconnectedEvent;
 use WaAPI\WaAPI\Events\GroupJoinEvent;
 use WaAPI\WaAPI\Events\GroupLeaveEvent;
@@ -128,6 +129,11 @@ class WaAPIController
                 $eventData
             ),
             EventType::MEDIA_DOWNLOADED => MediaDownloadedEvent::dispatch(
+                $eventType,
+                $instanceId,
+                $eventData
+            ),
+            EventType::CALL_STREAM_READY => CallStreamReadyEvent::dispatch(
                 $eventType,
                 $instanceId,
                 $eventData
